@@ -1,3 +1,4 @@
+// Reference: https://kkalamarski.me/a-declarative-approach-to-error-handling-in-typescript
 import Result, { Err, Ok } from "./err";
 
 type User = {
