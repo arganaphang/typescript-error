@@ -16,6 +16,10 @@ const parseJson = (json: string): Result<User, string> => {
 const user: Result<User, string> = parseJson('{"name": "John"}');
 const user2: Result<User, string> = parseJson("boom 💥");
 
+/* stdout
+{ name: 'John' }
+failed to parse json
+*/
 [user, user2].map((u) => {
   u.match({
     // ? val: User
