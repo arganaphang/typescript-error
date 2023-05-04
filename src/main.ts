@@ -4,25 +4,27 @@ type User = {
   name: string;
 };
 
-const parseJson = (json: string): Result<User, Error> => {
+const parseJson = (json: string): Result<User, string> => {
   try {
     const val = JSON.parse(json);
     return Ok(val);
-  } catch (error) {
-    return Err(error);
+  } catch (_error) {
+    return Err("failed to parse json");
   }
 };
 
-const user: Result<User, Error> = parseJson('{"name": "John"}');
-const user2: Result<User, Error> = parseJson("boom 💥");
+const user: Result<User, string> = parseJson('{"name": "John"}');
+const user2: Result<User, string> = parseJson("boom 💥");
 
 [user, user2].map((u) => {
   u.match({
+    // ? val: User
     Ok: (val) => {
       console.log(val);
     },
+    // ? e: string
     Err: (e) => {
-      console.log(`${e.name} - ${e.message}`);
+      console.log(e);
     },
   });
 });
